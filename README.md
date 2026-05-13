@@ -1,6 +1,50 @@
 # staticmap
 
+[![Docker Image Version](https://img.shields.io/docker/v/tof1878/staticmap?sort=semver&logo=docker&label=docker%20hub)](https://hub.docker.com/r/tof1878/staticmap)
+[![Docker Image Size](https://img.shields.io/docker/image-size/tof1878/staticmap/latest?logo=docker)](https://hub.docker.com/r/tof1878/staticmap)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tof1878/staticmap?logo=docker)](https://hub.docker.com/r/tof1878/staticmap)
+
 `staticmap` is a webserver written in Go to generate static maps from [OpenStreetMap](https://openstreetmap.org/) tiles. Its API is inspired by the [Google Static Maps API](https://developers.google.com/maps/documentation/static-maps/intro) but supports only a subset of the functions and parameters described there.
+
+## Quick start
+
+A prebuilt multi-arch Docker image (`linux/amd64`, `linux/arm64`) is published to Docker Hub as [`tof1878/staticmap`](https://hub.docker.com/r/tof1878/staticmap):
+
+```bash
+docker run -d --name staticmap \
+  --restart unless-stopped \
+  -p 2020:3000 \
+  -v staticmap_data:/data \
+  tof1878/staticmap:latest
+```
+
+Then check the server is up:
+
+```bash
+curl http://localhost:2020/status   # → "I'm fine"
+```
+
+And render your first map:
+
+```
+http://localhost:2020/map.png?center=48.8566,2.3522&zoom=13&size=800x500&circles=radius:1500|color:0x1e88e5|fill:0x1e88e533|weight:2|48.8566,2.3522
+```
+
+### Available image tags
+
+| Tag | Description |
+| ---- | ---- |
+| `latest` | Latest build from the `master` branch. |
+| `master` | Same as `latest`, kept as an explicit alias. |
+| `X.Y.Z` / `X.Y` / `X` | Immutable semantic version tags, published from `vX.Y.Z` git tags. |
+
+To upgrade later, re-pull and recreate the container:
+
+```bash
+docker pull tof1878/staticmap:latest
+docker rm -f staticmap
+docker run -d --name staticmap --restart unless-stopped -p 2020:3000 -v staticmap_data:/data tof1878/staticmap:latest
+```
 
 ## API
 
@@ -90,10 +134,20 @@ This example is generated with [OpenFireMap](http://openfiremap.org/) overlay ti
 
 ## Setup
 
-- Build the Docker image locally from this repository: `docker build -t staticmap .`
-- Or build the binary from source with `go build` from a clone of this repository
+The simplest way to run `staticmap` is the prebuilt Docker image — see the [Quick start](#quick-start) section above.
 
-Afterwards just see `staticmap --help` (or `docker run --rm -ti staticmap --help`) for commandline parameters.
+If you prefer to build from source instead:
+
+- Build the Docker image locally: `docker build -t staticmap .`
+- Or build the binary directly: `go build` from a clone of this repository
+
+To list all CLI flags and environment variables:
+
+```bash
+docker run --rm -ti tof1878/staticmap --help
+# or, for a local build:
+staticmap --help
+```
 
 ----
 
