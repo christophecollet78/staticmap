@@ -1,0 +1,22 @@
+services:
+  staticmap:
+    image: tof1878/staticmap:latest
+    container_name: staticmap
+    restart: unless-stopped
+    ports:
+      - "3030:3000"
+    volumes:
+      - staticmap_data:/data
+    environment:
+      MAX_SIZE: 2048x2048
+      RATE_LIMIT: "5"
+      RATE_LIMIT_TIME: "1s"
+      FORCE_CACHE: 168h
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/status || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  staticmap_data:
