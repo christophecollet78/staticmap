@@ -1,9 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/Luzifer/staticmap)](https://goreportcard.com/report/github.com/Luzifer/staticmap)
-![](https://badges.fyi/github/license/Luzifer/staticmap)
-![](https://badges.fyi/github/downloads/Luzifer/staticmap)
-![](https://badges.fyi/github/latest-release/Luzifer/staticmap)
-
-# Luzifer / staticmap
+# staticmap
 
 `staticmap` is a webserver written in Go to generate static maps from [OpenStreetMap](https://openstreetmap.org/) tiles. Its API is inspired by the [Google Static Maps API](https://developers.google.com/maps/documentation/static-maps/intro) but supports only a subset of the functions and parameters described there.
 
@@ -95,11 +90,10 @@ This example is generated with [OpenFireMap](http://openfiremap.org/) overlay ti
 
 ## Setup
 
-- There is a Docker container available: [`luzifer/staticmap`](https://hub.docker.com/r/luzifer/staticmap/)
-- This repository has precompiled binaries attached in the [releases](https://github.com/Luzifer/staticmap/releases) section
-- You can `go get github.com/Luzifer/staticmap` the project and build it from source
+- Build the Docker image locally from this repository: `docker build -t staticmap .`
+- Or build the binary from source with `go build` from a clone of this repository
 
-Afterwards just see `staticmap --help` (or `docker run --rm -ti luzifer/staticmap --help`) for commandline parameters.
+Afterwards just see `staticmap --help` (or `docker run --rm -ti staticmap --help`) for commandline parameters.
 
 ----
 
