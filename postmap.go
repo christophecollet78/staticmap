@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	staticMap "github.com/Luzifer/go-staticmaps"
+	staticMap "github.com/christophecollet78/go-staticmaps"
 	"github.com/golang/geo/s2"
 	"github.com/pkg/errors"
 )

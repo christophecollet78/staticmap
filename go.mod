@@ -1,11 +1,11 @@
-module github.com/Luzifer/staticmap
+module github.com/christophecollet78/staticmap
 
 go 1.22
 
 require (
-	github.com/Luzifer/go-staticmaps v0.0.0-20241029093116-4051913e21ff
 	github.com/Luzifer/go_helpers/v2 v2.25.0
 	github.com/Luzifer/rconfig/v2 v2.5.2
+	github.com/christophecollet78/go-staticmaps v0.0.0-20260513094643-01184d92d27c
 	github.com/didip/tollbooth v4.0.2+incompatible
 	github.com/fogleman/gg v1.3.0
 	github.com/golang/geo v0.0.0-20230421003525-6adc56603217
