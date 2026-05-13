@@ -52,6 +52,7 @@ type generateMapConfig struct {
 	Center             s2.LatLng
 	Zoom               int
 	Markers            []marker
+	Circles            []circle
 	Width              int
 	Height             int
 	DisableAttribution bool
@@ -64,16 +65,22 @@ func (g generateMapConfig) getCacheKey() string {
 		markerString = append(markerString, m.String())
 	}
 
+	circleString := []string{}
+	for _, c := range g.Circles {
+		circleString = append(circleString, c.String())
+	}
+
 	overlayString := []string{}
 	for _, o := range g.Overlays {
 		overlayString = append(overlayString, o.URLPattern)
 	}
 
-	hashString := fmt.Sprintf("%s:::%s|%d|%s|%dx%d|%v|%s",
+	hashString := fmt.Sprintf("%s:::%s|%d|%s|%s|%dx%d|%v|%s",
 		version,
 		g.Center.String(),
 		g.Zoom,
 		strings.Join(markerString, "+"),
+		strings.Join(circleString, "+"),
 		g.Width,
 		g.Height,
 		g.DisableAttribution,
@@ -98,6 +105,12 @@ func generateMap(opts generateMapConfig) (io.Reader, error) {
 	if opts.Markers != nil {
 		for _, m := range opts.Markers {
 			ctx.AddObject(staticMap.NewMarker(m.pos, m.color, float64(m.size)))
+		}
+	}
+
+	if opts.Circles != nil {
+		for _, c := range opts.Circles {
+			ctx.AddObject(staticMap.NewCircle(c.pos, c.color, c.fill, c.radius, c.weight))
 		}
 	}
 

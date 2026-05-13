@@ -112,6 +112,11 @@ func handleMapRequest(res http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if opts.Circles, err = parseCircles(r.URL.Query()["circles"]); err != nil {
+		http.Error(res, fmt.Sprintf("Unable to parse 'circles' parameter: %s", err), http.StatusBadRequest)
+		return
+	}
+
 	if mapReader, err = cacheFunc(opts); err != nil {
 		logrus.Errorf("map render failed: %s (Request: %s)", err, r.URL.String())
 		http.Error(res, fmt.Sprintf("I experienced difficulties rendering your map: %s", err), http.StatusInternalServerError)
