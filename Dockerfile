@@ -1,7 +1,7 @@
 FROM golang:alpine as builder
 
-COPY . /go/src/github.com/Luzifer/staticmap
-WORKDIR /go/src/github.com/Luzifer/staticmap
+COPY . /go/src/github.com/christophecollet78/staticmap
+WORKDIR /go/src/github.com/christophecollet78/staticmap
 
 RUN set -ex \
  && apk add --update git \

@@ -8,7 +8,7 @@ import (
 	"io"
 	"strings"
 
-	staticMap "github.com/Luzifer/go-staticmaps"
+	staticMap "github.com/christophecollet78/go-staticmaps"
 	"github.com/fogleman/gg"
 	"github.com/golang/geo/s2"
 	"github.com/pkg/errors"
@@ -92,7 +92,7 @@ func (g generateMapConfig) getCacheKey() string {
 
 func generateMap(opts generateMapConfig) (io.Reader, error) {
 	ctx := staticMap.NewContext()
-	ctx.SetUserAgent(fmt.Sprintf("Mozilla/5.0+(compatible; staticmap/%s; https://github.com/Luzifer/staticmap)", version))
+	ctx.SetUserAgent(fmt.Sprintf("Mozilla/5.0+(compatible; staticmap/%s; https://github.com/christophecollet78/staticmap)", version))
 
 	ctx.SetSize(opts.Width, opts.Height)
 	ctx.SetCenter(opts.Center)
