@@ -45,6 +45,8 @@ A Material-blue translucent circle of 1500 m around Paris, with a blue marker on
     &circles=radius:1500|color:0x1e88e5|fill:0x1e88e533|weight:2|48.8566,2.3522
 ```
 
+![](example/circle.png)
+
 Three concentric circles (500 m green, 1500 m orange, 3000 m red):
 
 ```
